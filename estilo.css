@@ -1,0 +1,317 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.calendario-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    /* NOVO: Diminuir o tamanho do título */
+    font-size: 2em; 
+}
+legenda {
+    margin-top: 15px;
+    font-size: 0.95em;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+/* Estilo para a tabela de horários */
+.horarios-fixos {
+    background-color: #e9f5ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #007bff;
+}
+
+.horarios-fixos h2 {
+    color: #007bff;
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+/* Estilo para a tabela do calendário */
+table {
+    width: 100%;
+    border-collapse: collapse; /* ISSO GERE AS BORDAS BEM DEFINIDAS */
+    margin-top: 20px;
+    table-layout: fixed; 
+}
+
+th, td {
+    border: 1px solid #ddd; /* ISSO ADICIONA AS BORDAS */
+    padding: 10px 5px;
+    text-align: center;
+}
+
+th {
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+td {
+    height: 80px; 
+    vertical-align: top;
+}
+
+.dia-numero {
+    font-weight: bold;
+    float: left;
+    padding: 5px;
+    color: #555;
+}
+
+/* Destaque para Dias Úteis (Segunda a Sexta) */
+.dia-util {
+    background-color: #f8f8f8;
+}
+
+/* Dias Inativos (Fim de Semana/Outros meses) */
+.dia-inativo {
+    background-color: #eee;
+    color: #aaa;
+}
+
+/* Novo Estilo para o Teletrabalho */
+.remoto {
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #28a745; 
+    margin-top: 5px;
+}
+
+.dia-feriado {
+    background-color: #ffcccc; 
+}
+
+.nota {
+    text-align: center;
+    margin-top: 30px;
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Ajustes para telas menores (Responsividade) */
+@media (max-width: 600px) {
+    .calendario-container {
+        padding: 15px;
+    }
+    th, td {
+        padding: 5px 2px;
+        font-size: 0.8em;
+    }
+    .dia-numero {
+        padding: 2px;
+    }
+}
+/* --- Estilos para a Visualização de Membros (Presença) --- */
+.membro {
+    display: block; /* Cada nome numa linha */
+    font-size: 0.75em;
+    font-weight: normal;
+    text-align: left;
+    padding-left: 5px;
+    margin-top: 2px;
+    color: #555; /* Cor base para a presença (presencial) */
+}
+/* Estilo para quando o membro está em TELETRABALHO (aplicado pelo JS) */
+.membro.remoto {
+    font-weight: bold;
+    color: #28a745; /* Verde para destacar o teletrabalho */
+    background-color: #e6ffe6; /* Fundo suave para o dia remoto */
+    border-left: 3px solid #28a745;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+/* Opcional: Estilo extra para a célula do dia remoto */
+.dia-util.dia-remoto-atribuido {
+    background-color: #f0fff0;
+}
+/* Estilo para destacar o dia que o utilizador selecionou */
+.dia-selecionado {
+    border: 3px solid #ffc107 !important; /* Borda amarela */
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    cursor: pointer;
+}
+
+/* Garante que os dias clicáveis têm um cursor apropriado */
+.dia-util {
+    cursor: pointer;
+}
+/* --- Estilos para o Painel de Trocas --- */
+.painel-trocas {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.painel-trocas h2 {
+    color: #dc3545; /* Vermelho para destaque de ação */
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    box-sizing: border-box; /* Garante que o padding não aumenta a largura total */
+}
+
+#btnTrocar {
+    background-color: #dc3545; /* Vermelho */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#btnTrocar:hover {
+    background-color: #c82333;
+}
+
+.feedback-troca {
+    margin-top: 10px;
+    font-weight: bold;
+}
+/* --- Estilos para o Seletor de Modo de Troca --- */
+.troca-modo-selector {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+    overflow: hidden; /* Para conter as bordas dos botões */
+}
+
+.troca-modo-selector button {
+    flex-grow: 1;
+    padding: 10px 5px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s;
+}
+
+.troca-modo-selector button:not(:last-child) {
+    border-right: 1px solid #dc3545; /* Linha de divisão */
+}
+
+.troca-modo-selector button.active {
+    background-color: #dc3545;
+    color: white;
+    font-weight: bold;
+}
+/* --- Estilos para o Painel de Férias --- */
+.painel-ferias {
+    background-color: #fff3cd; /* Amarelo suave */
+    padding: 20px;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.painel-ferias h2 {
+    color: #ffc107;
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+#btnAplicarFerias {
+    background-color: #ffc107; 
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#btnAplicarFerias:hover {
+    background-color: #e0a800;
+}
+
+/* --- Estilo para o Estado de Férias no Calendário --- */
+.membro.ferias {
+    color: #6c757d; /* Cinza claro */
+    font-style: italic;
+}
+
+/* Opcional: Um toque de cor de fundo para a célula do dia de férias, se aplicável */
+.dia-ferias-aplicado {
+    background-color: #f7f7f7; 
+}
+/* --- Novo Estilo para Campos em Linha --- */
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row .form-grupo {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Novo estilo para o botão Limpar */
+#btnLimparFerias {
+    background-color: #6c757d !important; /* Cinza para Limpar */
+}
+
+#btnLimparFerias:hover {
+    background-color: #5a6268 !important;
+}
+/* Estilo para o botão de Reset */
+#btnReset {
+    background-color: #f0ad4e !important; /* Laranja para Reset */
+    color: white;
+}
+
+#btnReset:hover {
+    background-color: #ec971f !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

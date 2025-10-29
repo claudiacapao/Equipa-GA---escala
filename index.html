@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Calendário - Novembro 2025</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+    <div class="calendario-container">
+        <h1>🗓️ Escala GA ULSSM - Novembro 2025</h1>
+        
+     <div class="horario-base">
+    <h2>Horário Base da Equipa</h2>
+    <p>
+        **Sónia Constantino**: 7h30 – 16h30 | 
+        **Rafael Pinto**: 9h00 – 18h00 | 
+        **André Falé**: 9h30 – 18h30
+    </p>
+    <p class="legenda">
+        **Legenda:** Dia Remoto: <span style="color: #28a745; font-weight: bold;">☕</span> | Ausente/Férias: <span style="color: #6c757d; font-style: italic;">🌴</span>
+    </p>
+</div> 
+      <div class="painel-trocas">
+    <h2>🔄 Gestão de Trocas (Fase 5)</h2>
+    
+    <div class="troca-modo-selector">
+        <button id="modoTrocaDia" class="active">Trocar dia de remoto (Remoto ↔️ Presencial)</button>
+        <button id="modoTrocaPessoa">Trocar remoto entre colegas (Remoto A ↔️ Remoto B)</button>
+    </div>
+
+    <div class="form-grupo">
+        <label for="diaOrigem" id="labelOrigem">Dia de **Origem** (Remoto):</label>
+        <select id="diaOrigem">
+            <option value="">Selecione um dia</option>
+        </select>
+    </div>
+
+    <div class="form-grupo">
+        <label for="diaDestino" id="labelDestino">Dia de **Destino** (Presencial):</label>
+        <select id="diaDestino">
+            <option value="">Selecione um dia</option>
+        </select>
+    </div>
+    
+    <button id="btnTrocar">Efetuar Troca</button>
+    <p class="feedback-troca" id="feedbackTroca"></p>
+    <button id="btnReset" style="margin-top: 15px; background-color: #f0ad4e;">Reset do Mês</button>
+</div>
+<div class="painel-ferias">
+    <h2>🏖️ Gestão de Ausências e Substituição (Por Dias)</h2>
+    
+    <div class="form-row">
+        <div class="form-grupo">
+            <label for="membroAusente">Membro Ausente:</label>
+            <select id="membroAusente">
+                <option value="">Ninguém</option>
+                <option value="sonia">Sónia</option>
+                <option value="rafael">Rafael</option>
+                <option value="andre">André</option>
+            </select>
+        </div>
+
+        <div class="form-grupo">
+            <label for="substituto">Substituto:</label>
+            <select id="substituto">
+                <option value="">Nenhum substituto</option>
+                </select>
+        </div>
+    </div>
+    
+    <div class="form-row">
+        <div class="form-grupo">
+            <label for="diaInicio">Dia Início (Novembro):</label>
+            <select id="diaInicio">
+                </select>
+        </div>
+
+        <div class="form-grupo">
+            <label for="diaFim">Dia Fim (Novembro):</label>
+            <select id="diaFim">
+                </select>
+        </div>
+    </div>
+
+    <button id="btnAplicarFerias">Aplicar Férias (Substituir)</button>
+    <p class="feedback-ferias" id="feedbackFerias"></p>
+    
+    <button id="btnLimparFerias" style="margin-top:10px; background-color:#6c757d;">Limpar Ausências</button>
+</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Dom</th>
+                    <th>Seg</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sáb</th>
+                </tr>
+            </thead>
+ <tbody id="corpo-calendario">
+    <tr>
+        <td class="dia-inativo">26</td>
+        <td class="dia-inativo">27</td>
+        <td class="dia-inativo">28</td>
+        <td class="dia-inativo">29</td>
+        <td class="dia-inativo">30</td>
+        <td class="dia-inativo"><span class="dia-numero">31</span></td>
+        <td class="dia-inativo dia-feriado"><span class="dia-numero">1</span></td>
+    </tr>
+    <tr>
+        <td class="dia-inativo"><span class="dia-numero">2</span></td>
+        <td class="dia-util" data-dia="3">
+            <span class="dia-numero">3</span>
+            <span class="membro" data-membro="sonia" id="dia-3-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-3-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-3-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="4">
+            <span class="dia-numero">4</span>
+            <span class="membro" data-membro="sonia" id="dia-4-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-4-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-4-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="5">
+            <span class="dia-numero">5</span>
+            <span class="membro" data-membro="sonia" id="dia-5-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-5-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-5-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="6">
+            <span class="dia-numero">6</span>
+            <span class="membro" data-membro="sonia" id="dia-6-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-6-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-6-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="7">
+            <span class="dia-numero">7</span>
+            <span class="membro" data-membro="sonia" id="dia-7-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-7-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-7-andre">André</span>
+        </td>
+        <td class="dia-inativo"><span class="dia-numero">8</span></td>
+    </tr>
+    <tr>
+        <td class="dia-inativo"><span class="dia-numero">9</span></td>
+        <td class="dia-util" data-dia="10">
+            <span class="dia-numero">10</span>
+            <span class="membro" data-membro="sonia" id="dia-10-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-10-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-10-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="11">
+            <span class="dia-numero">11</span>
+            <span class="membro" data-membro="sonia" id="dia-11-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-11-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-11-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="12">
+            <span class="dia-numero">12</span>
+            <span class="membro" data-membro="sonia" id="dia-12-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-12-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-12-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="13">
+            <span class="dia-numero">13</span>
+            <span class="membro" data-membro="sonia" id="dia-13-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-13-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-13-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="14">
+            <span class="dia-numero">14</span>
+            <span class="membro" data-membro="sonia" id="dia-14-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-14-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-14-andre">André</span>
+        </td>
+        <td class="dia-inativo"><span class="dia-numero">15</span></td>
+    </tr>
+    <tr>
+        <td class="dia-inativo"><span class="dia-numero">16</span></td>
+        <td class="dia-util" data-dia="17">
+            <span class="dia-numero">17</span>
+            <span class="membro" data-membro="sonia" id="dia-17-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-17-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-17-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="18">
+            <span class="dia-numero">18</span>
+            <span class="membro" data-membro="sonia" id="dia-18-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-18-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-18-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="19">
+            <span class="dia-numero">19</span>
+            <span class="membro" data-membro="sonia" id="dia-19-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-19-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-19-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="20">
+            <span class="dia-numero">20</span>
+            <span class="membro" data-membro="sonia" id="dia-20-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-20-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-20-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="21">
+            <span class="dia-numero">21</span>
+            <span class="membro" data-membro="sonia" id="dia-21-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-21-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-21-andre">André</span>
+        </td>
+        <td class="dia-inativo"><span class="dia-numero">22</span></td>
+    </tr>
+    <tr>
+        <td class="dia-inativo"><span class="dia-numero">23</span></td>
+        <td class="dia-util" data-dia="24">
+            <span class="dia-numero">24</span>
+            <span class="membro" data-membro="sonia" id="dia-24-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-24-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-24-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="25">
+            <span class="dia-numero">25</span>
+            <span class="membro" data-membro="sonia" id="dia-25-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-25-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-25-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="26">
+            <span class="dia-numero">26</span>
+            <span class="membro" data-membro="sonia" id="dia-26-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-26-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-26-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="27">
+            <span class="dia-numero">27</span>
+            <span class="membro" data-membro="sonia" id="dia-27-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-27-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-27-andre">André</span>
+        </td>
+        <td class="dia-util" data-dia="28">
+            <span class="dia-numero">28</span>
+            <span class="membro" data-membro="sonia" id="dia-28-sonia">Sónia</span>
+            <span class="membro" data-membro="rafael" id="dia-28-rafael">Rafael</span>
+            <span class="membro" data-membro="andre" id="dia-28-andre">André</span>
+        </td>
+        <td class="dia-inativo"><span class="dia-numero">29</span></td>
+    </tr>
+    <tr>
+        <td class="dia-inativo"><span class="dia-numero">30</span></td>
+        <td class="dia-inativo"></td>
+        <td class="dia-inativo"></td>
+        <td class="dia-inativo"></td>
+        <td class="dia-inativo"></td>
+        <td class="dia-inativo"></td>
+        <td class="dia-inativo"></td>
+    </tr>
+</tbody>  
+       
+        </table>
+
+        <p class="nota">Fase 1 completa. Próximo passo: Rotação Semanal!</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
