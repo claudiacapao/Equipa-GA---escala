@@ -314,4 +314,74 @@ select {
     background-color: #ec971f !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+}
+/* ==========================================================
+   ESTILOS PARA IMPRESSÃO (PDF ou Papel)
+   ========================================================== */
+
+@media print {
+    /* 1. Oculta todos os painéis de controlo e feedback */
+    .painel-trocas, 
+    .painel-ferias, 
+    .horario-base, /* Apenas a legenda fica, o resto deve ser simples */
+    .feedback-troca, 
+    .feedback-ferias,
+    .container > h1:nth-of-type(2) /* Oculta o segundo H1 se houver algum duplicado */
+    {
+        display: none !important;
+    }
+
+    /* 2. Garante que o calendário e o título principal se destacam */
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 3. Ajusta o estilo do calendário para impressão */
+    .calendario {
+        box-shadow: none !important; /* Remove sombras */
+        border-radius: 0 !important; /* Remove cantos arredondados */
+        border: 2px solid #333 !important; /* Borda mais forte para a tabela */
+        page-break-after: auto; /* Garante que a tabela não parte */
+        font-size: 10pt;
+    }
+    
+    /* 4. Remove fundos e cores claras para poupar tinta */
+    .calendario th, .calendario td {
+        background-color: white !important; /* Força fundo branco */
+        border-color: #999 !important;
+        height: auto;
+        padding: 8px; /* Reduz o padding para mais compactação */
+    }
+
+    /* 5. Mantém a identificação dos estados (sem tinta) */
+    .membro.remoto {
+        color: black !important; /* Cor preta */
+        font-weight: bold;
+        text-decoration: underline; /* Usa sublinhado para indicar remoto em P&B */
+    }
+    
+    .membro.ferias {
+        color: #666 !important; /* Cinza escuro */
+    }
+    
+    .membro.presencial-destaque {
+        color: #333 !important;
+        font-weight: normal;
+    }
+    
+    /* 6. Garante que a Legenda é visível */
+    .legenda {
+        display: block !important;
+        background-color: white !important;
+        margin: 20px 0;
+        border: none;
+    }
+    
+    /* 7. Alinha a tabela à esquerda (opcional, mas comum em documentos) */
+    .calendario {
+        margin: 20px 0 0 0;
+    }
 }
