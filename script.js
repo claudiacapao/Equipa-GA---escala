@@ -19,7 +19,8 @@ const TODOS_COLABORADORES = {
     mario: "Mario Fonseca", 
     laura: "Laura Fernandes", 
     cintia: "Cintia Lopes", 
-    ana_m: "Ana Marques"
+    ana_m: "Ana Marques",
+    carolina_c: "Carolina C."
 };
 
 const DIAS_UTEIS_NOVEMBRO = [
@@ -497,4 +498,5 @@ preencherDropdownsDatas();
 adicionarEventListeners(); 
 
 // 4. Inicializa o calendário. Se o estado remoto estiver vazio, ele calcula a rotação padrão.
+
 inicializarCalendario();
