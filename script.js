@@ -290,8 +290,7 @@ function preencherSelectSubstitutos() {
     }
 }
 
-function aplicarFerias() {
-   {
+function aplicarFerias()  {
     const membroAusente = document.getElementById('membroAusente').value;
     const substituto = document.getElementById('substituto').value;
     const diaInicio = parseInt(document.getElementById('diaInicio').value);
@@ -310,7 +309,7 @@ function aplicarFerias() {
         return;
     }
     
-    estadoAusenciaPorDia = {}; // Zera o estado anterior de férias
+    // ATENÇÃO: A linha 'estadoAusenciaPorDia = {};' FOI REMOVIDA PERMANENTEMENTE AQUI.
 
     const indiceInicio = DIAS_UTEIS_NOVEMBRO.indexOf(diaInicio);
     const indiceFim = DIAS_UTEIS_NOVEMBRO.indexOf(diaFim);
@@ -319,18 +318,31 @@ function aplicarFerias() {
         feedback.textContent = 'Erro: Os dias selecionados não são dias úteis ou não existem no calendário.';
         return;
     }
+    
+    // 1. Cria um objeto temporário para as novas férias
+    const novasAusencias = {};
 
     for (let i = indiceInicio; i <= indiceFim; i++) {
         const dia = DIAS_UTEIS_NOVEMBRO[i];
-        estadoAusenciaPorDia[dia] = { ausente: membroAusente, substituto: substituto || null };
+        
+        // 2. Garante que não há sobreposição de férias
+        if (estadoAusenciaPorDia.hasOwnProperty(dia)) {
+            feedback.textContent = `Erro: O dia ${dia} já tem uma ausência registada. Limpe as férias ou ajuste as datas.`;
+            return; 
+        }
+
+        novasAusencias[dia] = { ausente: membroAusente, substituto: substituto || null };
     }
+    
+    // 3. LINHA CRÍTICA: Combina as férias existentes com as novas
+    estadoAusenciaPorDia = { ...estadoAusenciaPorDia, ...novasAusencias };
+
     // Recalcula a rotação (forçando) e salva o novo estado
     inicializarCalendario(true); 
 
     feedback.textContent = `Férias aplicadas: ${getNomeCompleto(membroAusente)} ausente de ${diaInicio} a ${diaFim}. ${substituto ? getNomeCompleto(substituto) + ' está na rotação.' : 'Nenhuma substituição aplicada.'}`;
     feedback.style.color = 'green';
 }
-
 function limparFerias() {
    estadoAusenciaPorDia = {}; // Zera o estado de ausência
 
@@ -499,4 +511,5 @@ adicionarEventListeners();
 // 4. Inicializa o calendário. Se o estado remoto estiver vazio, ele calcula a rotação padrão.
 
 inicializarCalendario();
+
 
