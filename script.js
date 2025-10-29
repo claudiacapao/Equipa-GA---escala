@@ -291,6 +291,7 @@ function preencherSelectSubstitutos() {
 }
 
 function aplicarFerias() {
+   {
     const membroAusente = document.getElementById('membroAusente').value;
     const substituto = document.getElementById('substituto').value;
     const diaInicio = parseInt(document.getElementById('diaInicio').value);
@@ -323,7 +324,6 @@ function aplicarFerias() {
         const dia = DIAS_UTEIS_NOVEMBRO[i];
         estadoAusenciaPorDia[dia] = { ausente: membroAusente, substituto: substituto || null };
     }
-
     // Recalcula a rotação (forçando) e salva o novo estado
     inicializarCalendario(true); 
 
@@ -332,15 +332,14 @@ function aplicarFerias() {
 }
 
 function limparFerias() {
-    estadoAusenciaPorDia = {};
+   estadoAusenciaPorDia = {}; // Zera o estado de ausência
+
     // Recalcula a rotação (forçando) e salva o estado sem ausências
     inicializarCalendario(true); 
     
     document.getElementById('feedbackFerias').textContent = 'Todas as ausências foram removidas.';
     document.getElementById('feedbackFerias').style.color = 'green';
 }
-
-
 // ==========================================================
 // FUNÇÕES DE EVENTO: PROCESSAMENTO DE TROCA
 // ==========================================================
@@ -500,3 +499,4 @@ adicionarEventListeners();
 // 4. Inicializa o calendário. Se o estado remoto estiver vazio, ele calcula a rotação padrão.
 
 inicializarCalendario();
+
